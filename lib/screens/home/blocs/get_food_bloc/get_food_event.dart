@@ -1,4 +1,10 @@
-// part of 'get_food_bloc.dart';
+part of 'get_food_bloc.dart';
 
-// @immutable
-// sealed class GetFoodEvent {}
+sealed class GetFoodEvent extends Equatable {
+  const GetFoodEvent();
+
+  @override
+  List<Object> get props => [];
+}
+
+class GetFood extends GetFoodEvent{}
