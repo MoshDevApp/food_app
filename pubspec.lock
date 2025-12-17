@@ -89,8 +89,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.8"
-<<<<<<< HEAD
-=======
   equatable:
     dependency: "direct main"
     description:
@@ -99,7 +97,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.7"
->>>>>>> 4a70c1a4f5519731fe565bbfe033421f01ddbc21
   fake_async:
     dependency: transitive
     description:
@@ -182,14 +179,11 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-<<<<<<< HEAD
-=======
   flutter_web_plugins:
     dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
->>>>>>> 4a70c1a4f5519731fe565bbfe033421f01ddbc21
   font_awesome_flutter:
     dependency: "direct main"
     description:
@@ -198,8 +192,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "10.12.0"
-<<<<<<< HEAD
-=======
   food_repository:
     dependency: "direct main"
     description:
@@ -223,7 +215,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.7"
->>>>>>> 4a70c1a4f5519731fe565bbfe033421f01ddbc21
   leak_tracker:
     dependency: transitive
     description:
@@ -312,6 +303,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.5+1"
+  rxdart:
+    dependency: transitive
+    description:
+      name: rxdart
+      sha256: "0c7c0cedd93788d996e33041ffecda924cc54389199cde4e6a34b440f50044cb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.27.7"
   sky_engine:
     dependency: transitive
     description: flutter

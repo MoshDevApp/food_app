@@ -9,11 +9,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-<<<<<<< HEAD
-  cupertino_icons: ^1.0.6
-  font_awesome_flutter: ^10.6.0
-
-=======
   cupertino_icons: ^1.0.8
   font_awesome_flutter: ^10.12.0
 
@@ -27,7 +22,6 @@ dependencies:
     path: packages/user_repository
   food_repository:
     path: packages/food_repository
->>>>>>> 4a70c1a4f5519731fe565bbfe033421f01ddbc21
 
 dev_dependencies:
   flutter_test:
