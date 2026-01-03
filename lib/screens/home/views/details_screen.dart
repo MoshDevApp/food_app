@@ -1,10 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:food_app/components/macro.dart';
+import 'package:food_repository/food_repository.dart';
+import '../../../components/macro.dart';
 
 class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({super.key});
+  final Food food;
+  const DetailsScreen(this.food, {super.key});
 
   @override
   Widget build(BuildContext context) {

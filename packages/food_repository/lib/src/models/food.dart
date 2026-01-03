@@ -1,8 +1,8 @@
 import 'package:food_repository/food_repository.dart';
 import 'models.dart';
 
-class Pizza{
-  String pizzaId;
+class Food{
+  String foodId;
   String picture;
   bool isVeg;
   int spicy;
@@ -12,8 +12,8 @@ class Pizza{
   double discount;
   Macros macros;
 
-  Pizza({
-    required this.pizzaId,
+  Food({
+    required this.foodId,
     required this.picture,
     required this.isVeg,
     required this.spicy,
@@ -24,9 +24,9 @@ class Pizza{
     required this.macros,
    });
 
-  PizzaEntity toEntity() {
-    return PizzaEntity(
-    pizzaId: pizzaId,
+  FoodEntity toEntity() {
+    return FoodEntity(
+    foodId: foodId,
     picture: picture,
     isVeg: isVeg,
     spicy: spicy,
@@ -38,9 +38,9 @@ class Pizza{
     );
   }
 
-  static Pizza fromEntity(PizzaEntity entity) {
-    return Pizza(
-    pizzaId:entity.pizzaId,
+  static Food fromEntity(FoodEntity entity) {
+    return Food(
+    foodId:entity.foodId,
     picture:entity.picture,
     isVeg:entity.isVeg,
     spicy:entity.spicy,

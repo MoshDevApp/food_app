@@ -11,7 +11,7 @@ final class GetFoodInitial extends GetFoodState {}
 
 final class GetFoodFailure extends GetFoodState {}
 final class GetFoodLoading extends GetFoodState {}
-final class GetFoodaSuccess extends GetFoodState {
+final class GetFoodSuccess extends GetFoodState {
   final List<Food> foods;
 
   const GetFoodSuccess(this.foods);

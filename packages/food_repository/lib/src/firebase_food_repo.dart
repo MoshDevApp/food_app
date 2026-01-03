@@ -3,15 +3,15 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:food_repository/food_repository.dart';
 
-class FirebasePizzaRepo implements PizzaRepo{
-  final pizzaCollection = FirebaseFirestore.instance.collection('pizza');
+class FirebaseFoodRepo implements FoodRepo{
+  final foodCollection = FirebaseFirestore.instance.collection('food');
 
-  Future<List<Pizza>> getPizzas() async {
+  Future<List<Food>> getFoods() async {
     try{
-      return await pizzaCollection
+      return await foodCollection
       .get()
       .then((value) => value.docs.map((e) =>
-      Pizza.fromEntity(PizzaEntity.fromDocument(e.data()))
+      Food.fromEntity(FoodEntity.fromDocument(e.data()))
     ).toList());
     }catch (e){
       log(e.toString());

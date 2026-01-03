@@ -2,8 +2,8 @@ import 'package:food_repository/src/entities/macros_entity.dart';
 
 import '../models/models.dart';
 
-class PizzaEntity{
-  String pizzaId;
+class FoodEntity{
+  String foodId;
   String picture;
   bool isVeg;
   int spicy;
@@ -13,8 +13,8 @@ class PizzaEntity{
   double discount;
   Macros macros;
 
-   PizzaEntity({
-    required this.pizzaId,
+   FoodEntity({
+    required this.foodId,
     required this.picture,
     required this.isVeg,
     required this.spicy,
@@ -27,7 +27,7 @@ class PizzaEntity{
 
    Map<String, Object?> toDocument() {
     return {
-    'pizzaId':pizzaId,
+    'foodId':foodId,
     'picture':picture,
     'isVeg':isVeg,
     'spicy':spicy,
@@ -39,9 +39,9 @@ class PizzaEntity{
     };
   }
 
-  static PizzaEntity fromDocument(Map<String, dynamic> doc) {
-    return PizzaEntity(
-      pizzaId: doc['pizzaId'],
+  static FoodEntity fromDocument(Map<String, dynamic> doc) {
+    return FoodEntity(
+      foodId: doc['foodId'],
       picture: doc['picture'],
       isVeg: doc['isVeg'],
       spicy: doc['spicy'],

@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_app/screens/auth/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:food_app/screens/home/blocs/get_food_bloc/get_food_bloc.dart';
+import 'package:food_app/screens/home/views/details_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -36,7 +38,7 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: BlocBuilder<GetFoodBloc, GetFoodState>(
           builder: (context, state) {
-            if(state is GetFoodaSuccess) {
+            if(state is GetFoodSuccess) {
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
