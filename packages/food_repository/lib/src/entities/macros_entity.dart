@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 class MacrosEntity {
   int calories;
