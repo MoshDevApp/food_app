@@ -14,7 +14,7 @@ class MyAppView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Pizza Delivery',
+        title: 'FoodKuala',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(colorScheme: ColorScheme.light(background: Colors.grey.shade200, onBackground: Colors.black, primary: Colors.blue, onPrimary: Colors.white)),
         home: BlocBuilder<AuthenticationBloc, AuthenticationState>(

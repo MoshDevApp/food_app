@@ -35,7 +35,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   void _onUpdateQuantity(UpdateQuantity event, Emitter<CartState> emit) {
     final updatedItems = state.items.map((item) {
       if (item.food.name == event.foodName) {
-        return CartItem(food: item.food, quantity: event.quantity);
+        return CartItem(food: item.food, quantity: event.quantity, id: item.id ?? '', name: item.name, price: item.price, image: item.image ?? '');
       }
       return item;
     }).where((item) => item.quantity > 0).toList();

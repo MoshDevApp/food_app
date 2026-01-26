@@ -1,11 +1,3 @@
-// part of 'authentication_bloc.dart';
-
-// @immutable
-// sealed class AuthenticationState {}
-
-// final class AuthenticationInitial extends AuthenticationState {}
-
-
 part of 'authentication_bloc.dart';
 
 enum AuthenticationStatus { authenticated, unauthenticated, unknown }

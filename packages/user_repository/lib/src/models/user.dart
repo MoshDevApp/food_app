@@ -42,4 +42,13 @@ class MyUser {
   String toString() {
     return 'MyUser: $userId, $email, $name, $hasActiveCart';
   }
+
+  MyUser copyWith({required String userId}) {
+    return MyUser(
+      userId: userId,
+      email: email,
+      name: name,
+      hasActiveCart: hasActiveCart,
+    );
+  }
 }

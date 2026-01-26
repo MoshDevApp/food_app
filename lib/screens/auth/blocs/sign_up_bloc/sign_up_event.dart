@@ -1,8 +1,3 @@
-// part of 'sign_up_bloc.dart';
-
-// @immutable
-// sealed class SignUpEvent {}
-
 part of 'sign_up_bloc.dart';
 
 sealed class SignUpEvent extends Equatable {

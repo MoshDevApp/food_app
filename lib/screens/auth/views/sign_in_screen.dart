@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../components/my_text_field.dart';
 import '../blocs/sign_in_bloc/sign_in_bloc.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -13,129 +10,164 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-	final passwordController = TextEditingController();
-  final emailController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-	bool signInRequired = false;
-	IconData iconPassword = CupertinoIcons.eye_fill;
-	bool obscurePassword = true;
-	String? _errorMsg;
-	
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  bool _obscurePassword = true;
+
+  // Warm color palette
+  static const Color warmOrange = Color(0xFFFF6B35);
+  static const Color warmRed = Color(0xFFE63946);
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<SignInBloc, SignInState>(
-			listener: (context, state) {
-				if(state is SignInSuccess) {
-					setState(() {
-					  signInRequired = false;
-					});
-				} else if(state is SignInProcess) {
-					setState(() {
-					  signInRequired = true;
-					});
-				} else if(state is SignInFailure) {
-					setState(() {
-					  signInRequired = false;
-						_errorMsg = 'Invalid email or password';
-					});
-				}
-			},
-			child: Form(
+      listener: (context, state) {
+        if (state is SignInFailure) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Sign in failed')),
+          );
+        }
+      },
+      child: Form(
         key: _formKey,
-        child: Column(
-          children: [
-            const SizedBox(height: 20),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.9,
-              child: MyTextField(
-                controller: emailController,
-                hintText: 'Email',
-                obscureText: false,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const SizedBox(height: 25),
+              // Email Field
+              TextFormField(
+                controller: _emailController,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.email_outlined, color: Colors.grey.shade600),
+                  hintText: 'Email',
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
                 keyboardType: TextInputType.emailAddress,
-                prefixIcon: const Icon(CupertinoIcons.mail_solid),
-                errorMsg: _errorMsg,
-                validator: (val) {
-                  if (val!.isEmpty) {
-                    return 'Please fill in this field';
-                  } else if (!RegExp(r'^[\w-\.]+@([\w-]+.)+[\w-]{2,4}$').hasMatch(val)) {
-                    return 'Please enter a valid email';
-                  }
-                  return null;
-                }
-              )
-            ),
-            const SizedBox(height: 10),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.9,
-              child: MyTextField(
-                controller: passwordController,
-                hintText: 'Password',
-                obscureText: obscurePassword,
-                keyboardType: TextInputType.visiblePassword,
-                prefixIcon: const Icon(CupertinoIcons.lock_fill),
-                errorMsg: _errorMsg,
-                validator: (val) {
-                  if (val!.isEmpty) {
-                    return 'Please fill in this field';
-                  } else if (!RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~`)\%\-(_+=;:,.<>/?"[{\]}\|^]).{8,}$').hasMatch(val)) {
-                    return 'Please enter a valid password';
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your email';
                   }
                   return null;
                 },
-                suffixIcon: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      obscurePassword = !obscurePassword;
-                      if(obscurePassword) {
-                        iconPassword = CupertinoIcons.eye_fill;
-                      } else {
-                        iconPassword = CupertinoIcons.eye_slash_fill;
-                      }
-                    });
-                  },
-                  icon: Icon(iconPassword),
-                ),
               ),
-            ),
-            const SizedBox(height: 20),
-            !signInRequired
-              ? SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.5,
-                  child: TextButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        context.read<SignInBloc>().add(SignInRequired(
-                          emailController.text,
-                          passwordController.text)
-                        );
-                      }
-                    },
-                    style: TextButton.styleFrom(
-                      elevation: 3.0,
-                      backgroundColor: Theme.of(context).colorScheme.primary,
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(60)
-                      )
+              const SizedBox(height: 16),
+              // Password Field
+              TextFormField(
+                controller: _passwordController,
+                obscureText: _obscurePassword,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.lock_outline, color: Colors.grey.shade600),
+                  hintText: 'Password',
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                      color: Colors.grey.shade600,
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
-                      child: Text(
-                        'Sign In',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600
+                    onPressed: () {
+                      setState(() {
+                        _obscurePassword = !_obscurePassword;
+                      });
+                    },
+                  ),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your password';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 24),
+              // Sign In Button with Gradient
+              BlocBuilder<SignInBloc, SignInState>(
+                builder: (context, state) {
+                  return Container(
+                    width: double.infinity,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [Color.fromARGB(255, 87, 240, 74), Color.fromARGB(255, 15, 150, 26)],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color: warmOrange.withOpacity(0.4),
+                          blurRadius: 12,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.transparent,
+                        shadowColor: Colors.transparent,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                    )
-                  ),
-                )
-            : const CircularProgressIndicator(),
-          ],
-        )
+                      onPressed: state is SignInLoading
+                          ? null
+                          : () {
+                              if (_formKey.currentState!.validate()) {
+                                context.read<SignInBloc>().add(
+                                      SignInRequired(
+                                        _emailController.text,
+                                        _passwordController.text,
+                                      ),
+                                    );
+                              }
+                            },
+                      child: state is SignInLoading
+                          ? const SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 2,
+                              ),
+                            )
+                          : const Text(
+                              'Sign In',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
       ),
-		);
+    );
   }
+}
+
+class SignInLoading {
 }
